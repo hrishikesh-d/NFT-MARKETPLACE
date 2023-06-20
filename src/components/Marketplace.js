@@ -10,8 +10,6 @@ const sampleData = [
     {
         "name": "NFT#1",
         "description": "First NFT",
-        "website":"http://axieinfinity.io",
-        // "image":"https://gateway.pinata.cloud/ipfs/QmTsRJX7r5gyubjkdmzFrKQhHv74p5wT9LdeF1m3RTqrE5",
         "price":"0.03ETH",
         "currentlySelling":"True",
         "address":"0xe81Bf5A757CB4f7F82a2F23b1e59bE45c33c5b13",
@@ -19,8 +17,6 @@ const sampleData = [
     {
         "name": "NFT#2",
         "description": "Second NFT",
-        "website":"http://axieinfinity.io",
-        // "image":"https://gateway.pinata.cloud/ipfs/QmdhoL9K8my2vi3fej97foiqGmJ389SMs55oC5EdkrxF2M",
         "price":"0.03ETH",
         "currentlySelling":"True",
         "address":"0xe81Bf5A757C4f7F82a2F23b1e59bE45c33c5b13",
@@ -28,8 +24,6 @@ const sampleData = [
     {
         "name": "NFT#3",
         "description": "Third NFT",
-        "website":"http://axieinfinity.io",
-        // "image":"https://gateway.pinata.cloud/ipfs/QmTsRJX7r5gyubjkdmzFrKQhHv74p5wT9LdeF1m3RTqrE5",
         "price":"0.03ETH",
         "currentlySelling":"True",
         "address":"0xe81Bf5A757C4f7F82a2F23b1e59bE45c33c5b13",
@@ -40,15 +34,15 @@ const [dataFetched, updateFetched] = useState(false);
 
 async function getAllNFTs() {
     const ethers = require("ethers");
-    //After adding your Hardhat network to your metamask, this code will get providers and signers
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
-    //Pull the deployed contract instance
-    let contract = new ethers.Contract(MarketplaceJSON.address, MarketplaceJSON.abi, signer)
-    //create an NFT Token
+    
+        let contract = new ethers.Contract(MarketplaceJSON.address, MarketplaceJSON.abi, signer)
+    
     let transaction = await contract.getAllNFTs()
 
-    //Fetch all the details of every NFT from the contract and display
+
+    
     const items = await Promise.all(transaction.map(async i => {
         var tokenURI = await contract.tokenURI(i.tokenId);
         console.log("getting this tokenUri", tokenURI);
